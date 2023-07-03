@@ -1,5 +1,25 @@
+// Import Internal Modules
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 function App() {
-  return <h1>Hello World</h1>;
+  const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+  ]);
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;
