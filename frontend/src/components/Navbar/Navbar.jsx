@@ -1,5 +1,5 @@
 // Import internal modules
-import "./navbarstyle.scss";
+import "./Navbar.scss";
 
 // Import External Modules
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -53,7 +53,7 @@ const Navbar = () => {
             src=""
             alt=""
           />
-          <span>Some names</span>
+          <span>Some name</span>
         </div>
 
       </div>
