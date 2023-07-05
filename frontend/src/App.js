@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 // Import Internal Modules
+
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
@@ -16,15 +17,21 @@ import Navbar from "./components/Navbar/Navbar";
 import LeftBar from "./components/Leftbar/Leftbar";
 import RightBar from "./components/Rightbar/Rightbar";
 
+import "./style.scss";
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
+
 function App() {
   // Var only for testing purpose - testing Protected Routes
   const currentUser = true;
+
+  const { darkMode } = useContext(DarkModeContext);
 
   // This propertie Allow us to use reusable components
   // Return Outlet from react-router-dom
   const Layout = () => {
     return (
-      <div>
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
         <Navbar />
         <div style={{ display: "flex" }}>
           <LeftBar />
