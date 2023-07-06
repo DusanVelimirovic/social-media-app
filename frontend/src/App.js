@@ -20,10 +20,13 @@ import RightBar from "./components/Rightbar/Rightbar";
 import "./style.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { AuthContext } from "./context/authContext";
 
 function App() {
   // Var only for testing purpose - testing Protected Routes
-  const currentUser = true;
+  //const currentUser = true;
+
+  const {currentUser} = useContext(AuthContext);
 
   const { darkMode } = useContext(DarkModeContext);
 

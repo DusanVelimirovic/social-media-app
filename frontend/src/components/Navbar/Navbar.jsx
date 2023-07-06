@@ -10,16 +10,18 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
+import { AuthContext } from "../../context/authContext";
 
 const Navbar = () => {
-  const currentUser = "Dusan";
+  //const currentUser = "Dusan";
+  const { currentUser } = useContext(AuthContext); 
   const { toggle, darkMode } = useContext(DarkModeContext);
 
   return (
     <div className="navbar">
       <div className="left">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span>lamasocial</span>
+          <span>Social Media Application Portfolio</span>
         </Link>
         <HomeOutlinedIcon />
         {darkMode ? (
