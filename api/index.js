@@ -16,8 +16,16 @@ import authRoutes from "./routes/auth.js";
 const app = express();
 
 // Create routes middlewares
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 app.use(express.json()); // Allow us to parse data to json object
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(cookieParser());
 
 app.use("/api/users", userRoutes);
