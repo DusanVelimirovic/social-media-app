@@ -1,24 +1,28 @@
 import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 // Create and Export Auth Context API
 export const AuthContext = createContext();
 
 // Wrapp whole application
 // Use localStorage
+// Here we will store user object after authentication
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  const login = () => {
-    //TO DO
-    // User object
-    setCurrentUser({
-      id: 1,
-      name: "John Doe",
-      profilePic:
-        "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    });
+  // handle user object after login
+  const login = async (inputs) => {
+    const res = await axios.post(
+      "http://localhost:8800/api/auth/login",
+      inputs,
+      {
+        withCredentials: true,
+      }
+    );
+
+    setCurrentUser(res.data);
   };
 
   // Pull user from localStorage
