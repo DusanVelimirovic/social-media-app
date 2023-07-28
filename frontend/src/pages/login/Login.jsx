@@ -1,5 +1,5 @@
 // Import external Modules
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 
 // Import Internal modules
@@ -20,18 +20,24 @@ const Login = () => {
   // Handle errors during login
   const [err, setError] = useState(null);
 
+  // Use navigate hook to after succesufull login redirect to home page
+  const navigate = useNavigate();
+
   // Handle changes in form input fields
   // Pass data as callback to setInputs()
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value}));
   };
 
-  const { login } = useContext(AuthContext);
+// AuthContext return login()
+const { login } = useContext(AuthContext);
 
 const handleLogin = async (e) => {
   e.preventDefault();
   try{
-    await login(inputs)
+    await login(inputs);
+    // After succesufull login navigate to home page
+    navigate("/");
   } catch (err){
     setError(err.response.data);
   }
