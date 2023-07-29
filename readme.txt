@@ -32,4 +32,8 @@ CORS (Cross-origin resource sharing)
     Drugim recima, omogucava konstrolisani pristup ogranicenim resursima (domenska kontrola pristupa)
     https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 
-    
+
+React Query
+    Neophodan kako bismo mogli da posaljemo zahtev serveru ili da nam informacije ostanu na stranici nakon sto se stranica refreshuje  
+    Koristii smo ga kod hvatanja postova
+    On je neka vrsta alternative za useEffect i Redux  
