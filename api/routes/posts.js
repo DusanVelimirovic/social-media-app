@@ -4,12 +4,13 @@
 import express from "express";
 
 // Import controller function
-import {} from "../contollers/post.js";
+import { getPosts } from "../contollers/post.js";
 
 // Create router object
 const router = express.Router();
 
 // handle get request
-router.get("");
+// Calling getPosts method - bussines logic
+router.get("/", getPosts);
 
 export default router;
