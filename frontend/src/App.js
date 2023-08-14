@@ -52,7 +52,6 @@ function App() {
       </QueryClientProvider>
     );
   };
-
   // Protect some routers - example: if user is not logined or registered redirect to login or register page
   // Children are protected routes
   // In our case Protected Routes are Home and Profile Components

@@ -2,7 +2,7 @@ import "./Register.scss";
 
 // Import external Modules
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import axios from "axios";
 
 
@@ -21,6 +21,9 @@ const [inputs, setInputs] = useState({
 // Handle errors during register
 const [err, setError] = useState(null);
 
+// Use navigate hook to after succesufull registration redirect to login page
+const navigate = useNavigate();
+
 // Handle changes in form input fields
 // Pass data as callback to setInputs()
 const handleChange = (e) => {
@@ -33,6 +36,7 @@ const handleClick = async e => {
 
   try {
     await axios.post("http://localhost:8800/api/auth/register", inputs);
+    navigate("/login");
     
   }
 

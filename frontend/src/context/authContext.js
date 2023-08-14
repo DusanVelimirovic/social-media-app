@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  // handle user object after login
+  // Handle user inputs from login form
   const login = async (inputs) => {
     const res = await axios.post(
       "http://localhost:8800/api/auth/login",
