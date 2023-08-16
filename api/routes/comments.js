@@ -4,12 +4,15 @@
 import express from "express";
 
 // Import controller function
-import { getComments } from "../contollers/comment.js";
+import { getComments, addComment } from "../contollers/comment.js";
 
 // Create router object
 const router = express.Router();
 
-// handle get request
+// Handle get request
 router.get("/", getComments);
+
+// Handle post request
+router.post("/", addComment);
 
 export default router;
