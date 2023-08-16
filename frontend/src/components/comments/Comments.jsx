@@ -18,6 +18,7 @@ const Comments = ({ postId }) => {
 
   const queryClient = useQueryClient();
 
+  // Create new comment
   const mutation = useMutation(
     (newComment) => {
       return makeRequest.post("/comments", newComment);
