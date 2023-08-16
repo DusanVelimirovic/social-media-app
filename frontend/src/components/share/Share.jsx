@@ -6,13 +6,20 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-
 const Share = () => {
-
-  //const [file, setFile] = useState(null);
-  // State from post description
+  const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
 
+  const upload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await makeRequest.post("/upload", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const { currentUser } = useContext(AuthContext);
 
@@ -32,11 +39,11 @@ const Share = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    //let imgUrl = "";
-    //if (file) imgUrl = await upload();
-    mutation.mutate({ desc });
-   // setDesc("");
-   // setFile(null);
+    let imgUrl = "";
+    if (file) imgUrl = await upload();
+    mutation.mutate({ desc, img: imgUrl });
+    setDesc("");
+    setFile(null);
   };
 
   return (
@@ -53,6 +60,9 @@ const Share = () => {
             />
           </div>
           <div className="right">
+            {file && (
+              <img className="file" alt="" src={URL.createObjectURL(file)} />
+            )}
           </div>
         </div>
         <hr />
@@ -62,6 +72,7 @@ const Share = () => {
               type="file"
               id="file"
               style={{ display: "none" }}
+              onChange={(e) => setFile(e.target.files[0])}
             />
             <label htmlFor="file">
               <div className="item">

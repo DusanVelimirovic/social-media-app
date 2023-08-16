@@ -91,6 +91,7 @@ function App() {
       element: <Register />,
     },
   ]);
+
   return (
     <div>
       <RouterProvider router={router} />
