@@ -1,15 +1,10 @@
-// Default module for controlling Users endpoint
-
-// import Express module
 import express from "express";
+import { getLikes, addLike, deleteLike } from "../contollers/like.js";
 
-// Import controller function
-import {} from "../contollers/like.js";
-
-// Create router object
 const router = express.Router();
 
-// handle get request
-router.get("");
+router.get("/", getLikes);
+router.post("/", addLike);
+router.delete("/", deleteLike);
 
 export default router;
