@@ -24,7 +24,6 @@ const Post = ({ post }) => {
   // Fetch current user from local storage
   const { currentUser } = useContext(AuthContext);
 
-
   // Get likes from DB
   const { isLoading, error, data } = useQuery(["likes", post.id], () =>
   makeRequest.get("/likes?postId=" + post.id).then((res) => {
