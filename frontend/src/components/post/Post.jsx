@@ -24,7 +24,55 @@ const Post = ({ post }) => {
   // Fetch current user from local storage
   const { currentUser } = useContext(AuthContext);
 
-  const queryClient = useQueryClient();
+
+  // Get likes from DB
+  const { isLoading, error, data } = useQuery(["likes", post.id], () =>
+  makeRequest.get("/likes?postId=" + post.id).then((res) => {
+    return res.data;
+  })
+);
+
+const queryClient = useQueryClient();
+
+// Unlike
+// Allow us to unlike post only if we previously liked him
+const mutation = useMutation(
+  (liked) => {
+    if (liked) return makeRequest.delete("/likes?postId=" + post.id);
+    return makeRequest.post("/likes", { postId: post.id });
+  },
+  {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["likes"]);
+    },
+  }
+);
+/*
+// Delete post
+const deleteMutation = useMutation(
+  (postId) => {
+    return makeRequest.delete("/posts/" + postId);
+  },
+  {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries(["posts"]);
+    },
+  }
+);
+*/
+
+// Handle like with mutation so we can witout refreshing the page see results
+const handleLike = () => {
+  mutation.mutate(data.includes(currentUser.id));
+};
+
+/*
+const handleDelete = () => {
+  deleteMutation.mutate(post.id);
+};
+*/
 
   //TEMPORARY
   //const liked = false;
@@ -62,7 +110,7 @@ const Post = ({ post }) => {
         </div>
         <div className="info">
           <div className="item">
-            {/*
+            
                         {isLoading ? (
               "loading"
             ) : data.includes(currentUser.id) ? (
@@ -74,7 +122,7 @@ const Post = ({ post }) => {
               <FavoriteBorderOutlinedIcon onClick={handleLike} />
             )}
                         {data?.length} Likes
-            */}
+            
 
 
           </div>
