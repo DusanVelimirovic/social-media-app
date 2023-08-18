@@ -13,6 +13,7 @@ export const getUser = (req, res) => {
   });
 };
 
+// Handle update user profile
 export const updateUser = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not authenticated!");
